@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+
+# local
+*.env
+*.pem
+*.local
+
+# artifacts
+dist
+out
+build
+cache
+target
+.rustc_info.json
+
+# testing
+coverage
+
+# package manager
+node_modules
+yarn-debug.log*
+yarn-error.log*

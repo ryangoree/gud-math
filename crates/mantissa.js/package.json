@@ -1,0 +1,28 @@
+{
+  "name": "mantissa-src",
+  "version": "1.0.0",
+  "description": "Effortless fixed-point math in TypeScript",
+  "license": "Apache-2.0",
+  "type": "module",
+  "author": "Ryan Goree (https://github.com/ryangoree)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryangoree/"
+  },
+  "private": true,
+  "scripts": {
+    "build": "tsx scripts/build.ts",
+    "watch": "bun run build && onchange 'src/**/*.rs' -- bun run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.21",
+    "@types/proper-lockfile": "^4.1.4",
+    "onchange": "^7.1.0",
+    "proper-lockfile": "^4.1.2",
+    "smol-toml": "^1.3.4",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
+    "wasm-pack": "^0.13.1",
+    "wasm-pkg-build": "^0.5.3"
+  }
+}
