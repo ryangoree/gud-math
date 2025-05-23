@@ -1,4 +1,4 @@
-import { parseFixed, randomFixed } from '@rygo/mantissa';
+import { parseFixed, randomFixed } from '@gud/fixed';
 
 const principal = randomFixed({ min: '100e18', max: '100_000e18' });
 const rate = parseFixed(0.025);

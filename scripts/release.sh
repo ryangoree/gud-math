@@ -1,4 +1,5 @@
 #!/bin/bash
 set -e
-cp README.md packages/mantissa/README.md
-bun changeset publish
+bun run build
+cp README.md packages/fixed/README.md
+# bun changeset publish

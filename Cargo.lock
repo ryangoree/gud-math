@@ -1049,6 +1049,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "fixed"
+version = "0.0.0"
+dependencies = [
+ "ethers",
+ "eyre",
+ "paste",
+ "proptest",
+ "rand",
+ "tokio",
+]
+
+[[package]]
 name = "fixed-hash"
 version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1058,6 +1070,21 @@ dependencies = [
  "rand",
  "rustc-hex",
  "static_assertions",
+]
+
+[[package]]
+name = "fixed-js"
+version = "0.0.0"
+dependencies = [
+ "console_error_panic_hook",
+ "ethers",
+ "fixed",
+ "getrandom",
+ "js-sys",
+ "rand",
+ "ts-macro",
+ "utils-core",
+ "wasm-bindgen",
 ]
 
 [[package]]
@@ -1657,33 +1684,6 @@ name = "log"
 version = "0.4.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a7a70ba024b9dc04c27ea2f0c0548feb474ec5c54bba33a7f72f873a39d07b24"
-
-[[package]]
-name = "mantissa"
-version = "1.0.0"
-dependencies = [
- "ethers",
- "eyre",
- "paste",
- "proptest",
- "rand",
- "tokio",
-]
-
-[[package]]
-name = "mantissa-js"
-version = "0.0.0"
-dependencies = [
- "console_error_panic_hook",
- "ethers",
- "getrandom",
- "js-sys",
- "mantissa",
- "rand",
- "ts-macro",
- "utils-core",
- "wasm-bindgen",
-]
 
 [[package]]
 name = "md-5"
@@ -3162,8 +3162,9 @@ checksum = "e421abadd41a4225275504ea4d6566923418b7f05506fbc9c0fe86ba7396114b"
 
 [[package]]
 name = "ts-macro"
-version = "0.0.0"
-source = "git+https://github.com/ryangoree/wasm-utils-rs#5bff5dc1f3adf12323979186689b1b40b589e522"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e5ed4e9c0bd3940aecfaf658d68954cb2e46815751a38c6e65591a607b62fafd"
 dependencies = [
  "heck",
  "quote",
@@ -3174,8 +3175,9 @@ dependencies = [
 
 [[package]]
 name = "ts-type"
-version = "0.1.0"
-source = "git+https://github.com/ryangoree/wasm-utils-rs#5bff5dc1f3adf12323979186689b1b40b589e522"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5522facb8c969a773de6ee95cf12a201fd400054429c20b6f56cd68e365a92f7"
 dependencies = [
  "lazy_static",
  "regex",

@@ -1,5 +1,5 @@
 let imports = {};
-imports['./mantissa_js_bg.js'] = module.exports;
+imports['./fixed_js_bg.js'] = module.exports;
 let wasm;
 const { TextDecoder, TextEncoder } = require(`util`);
 let cachedTextDecoder = new TextDecoder('utf-8', {
@@ -1173,40 +1173,40 @@ class FixedPoint {
   }
 }
 module.exports.FixedPoint = FixedPoint;
-module.exports.__wbg_decimals_47b7f29bab6692d2 = function (arg0) {
+module.exports.__wbg_decimals_df7db544669b8619 = function (arg0) {
   const ret = getObject(arg0).decimals;
   return isLikeNone(ret) ? 0xFFFFFF : ret;
 };
-module.exports.__wbg_trailingzeros_2991a6b42b291b55 = function (arg0) {
+module.exports.__wbg_trailingzeros_f1ea026785996503 = function (arg0) {
   const ret = getObject(arg0).trailingZeros;
   return isLikeNone(ret) ? 0xFFFFFF : ret ? 1 : 0;
 };
-module.exports.__wbg_rounding_0093f14eb9e11314 = function (arg0, arg1) {
+module.exports.__wbg_rounding_842570daa682f51f = function (arg0, arg1) {
   const ret = getObject(arg1).rounding;
   var ptr1 = isLikeNone(ret) ? 0 : passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
   var len1 = WASM_VECTOR_LEN;
   getInt32Memory0()[arg0 / 4 + 1] = len1;
   getInt32Memory0()[arg0 / 4 + 0] = ptr1;
 };
-module.exports.__wbg_locale_fcb3a89240fb027f = function (arg0, arg1) {
+module.exports.__wbg_locale_54cf3a3e6ab0de8c = function (arg0, arg1) {
   const ret = getObject(arg1).locale;
   var ptr1 = isLikeNone(ret) ? 0 : passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
   var len1 = WASM_VECTOR_LEN;
   getInt32Memory0()[arg0 / 4 + 1] = len1;
   getInt32Memory0()[arg0 / 4 + 0] = ptr1;
 };
-module.exports.__wbg_group_3d3ca525ee051786 = function (arg0) {
+module.exports.__wbg_group_6e9ad08fca6972c4 = function (arg0) {
   const ret = getObject(arg0).group;
   return isLikeNone(ret) ? 0xFFFFFF : ret ? 1 : 0;
 };
-module.exports.__wbg_compactdisplay_5139ee7903534bf5 = function (arg0, arg1) {
+module.exports.__wbg_compactdisplay_526f7ce712a9e6cc = function (arg0, arg1) {
   const ret = getObject(arg1).compactDisplay;
   var ptr1 = isLikeNone(ret) ? 0 : passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
   var len1 = WASM_VECTOR_LEN;
   getInt32Memory0()[arg0 / 4 + 1] = len1;
   getInt32Memory0()[arg0 / 4 + 0] = ptr1;
 };
-module.exports.__wbg_percent_804181a960edcf93 = function (arg0) {
+module.exports.__wbg_percent_c94930cc5971aa69 = function (arg0) {
   const ret = getObject(arg0).percent;
   return isLikeNone(ret) ? 0xFFFFFF : ret ? 1 : 0;
 };
@@ -1217,18 +1217,18 @@ module.exports.__wbindgen_string_new = function (arg0, arg1) {
 module.exports.__wbindgen_object_drop_ref = function (arg0) {
   takeObject(arg0);
 };
-module.exports.__wbg_currency_2a2ca1ad419dc79f = function (arg0, arg1) {
+module.exports.__wbg_currency_16fd7dfd8fa12404 = function (arg0, arg1) {
   const ret = getObject(arg1).currency;
   var ptr1 = isLikeNone(ret) ? 0 : passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
   var len1 = WASM_VECTOR_LEN;
   getInt32Memory0()[arg0 / 4 + 1] = len1;
   getInt32Memory0()[arg0 / 4 + 0] = ptr1;
 };
-module.exports.__wbg_compact_6d5a0f056c7af903 = function (arg0) {
+module.exports.__wbg_compact_b2423c675f4df60a = function (arg0) {
   const ret = getObject(arg0).compact;
   return isLikeNone(ret) ? 0xFFFFFF : ret ? 1 : 0;
 };
-module.exports.__wbg_display_be22d12953f74846 = function (arg0, arg1) {
+module.exports.__wbg_display_e091ceca061fb53a = function (arg0, arg1) {
   const ret = getObject(arg1).display;
   var ptr1 = isLikeNone(ret) ? 0 : passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
   var len1 = WASM_VECTOR_LEN;
@@ -1239,11 +1239,11 @@ module.exports.__wbindgen_number_new = function (arg0) {
   const ret = arg0;
   return addHeapObject(ret);
 };
-module.exports.__wbg_isfixedpoint_6c5623f571b29af7 = function (arg0) {
+module.exports.__wbg_isfixedpoint_1e7613674416f437 = function (arg0) {
   const ret = getObject(arg0).is_fixed_point;
   return isLikeNone(ret) ? 0xFFFFFF : ret ? 1 : 0;
 };
-module.exports.__wbg_toString_3e377c54ffa113ee = function (arg0) {
+module.exports.__wbg_toString_1359487c9458b99a = function (arg0) {
   const ret = getObject(arg0).toString();
   return addHeapObject(ret);
 };
@@ -1255,15 +1255,15 @@ module.exports.__wbindgen_string_get = function (arg0, arg1) {
   getInt32Memory0()[arg0 / 4 + 1] = len1;
   getInt32Memory0()[arg0 / 4 + 0] = ptr1;
 };
-module.exports.__wbg_min_a0b9bdc097690171 = function (arg0) {
+module.exports.__wbg_min_5f177f653d636fd4 = function (arg0) {
   const ret = getObject(arg0).min;
   return isLikeNone(ret) ? 0 : addHeapObject(ret);
 };
-module.exports.__wbg_max_25a7f75bd7a848e5 = function (arg0) {
+module.exports.__wbg_max_dab42579221c5f5a = function (arg0) {
   const ret = getObject(arg0).max;
   return isLikeNone(ret) ? 0 : addHeapObject(ret);
 };
-module.exports.__wbg_decimals_867a43f18a6a0eec = function (arg0) {
+module.exports.__wbg_decimals_38b53ba633964b2c = function (arg0) {
   const ret = getObject(arg0).decimals;
   return isLikeNone(ret) ? 0xFFFFFF : ret;
 };
@@ -1516,7 +1516,7 @@ module.exports.__wbindgen_memory = function () {
   const ret = wasm.memory;
   return addHeapObject(ret);
 };
-const path = require('path').join(__dirname, 'mantissa_js_bg.wasm');
+const path = require('path').join(__dirname, 'fixed_js_bg.wasm');
 const bytes = require('fs').readFileSync(path);
 
 const wasmModule = new WebAssembly.Module(bytes);

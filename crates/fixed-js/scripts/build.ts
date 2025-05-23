@@ -18,7 +18,7 @@ import manifest from '../package.json' with { type: 'json' };
 
 // Settings
 const tempDir = 'tmp';
-const packageName = '@rygo/mantissa';
+const packageName = '@gud/fixed';
 const outDir = '../../../packages/';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -127,10 +127,6 @@ try {
   cpSync(
     resolve(__dirname, '../LICENSE'),
     resolve(outPath, 'LICENSE'),
-  )
-  cpSync(
-    resolve(__dirname, '../README.md'),
-    resolve(outPath, 'README.md'),
   )
 
   // 5. Remove the temporary build files.

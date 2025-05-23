@@ -8,7 +8,7 @@
     "dev:watch": "tsx --watch src/index.ts"
   },
   "dependencies": {
-    "@rygo/mantissa": "workspace:*"
+    "@gud/fixed": "workspace:*"
   },
   "devDependencies": {
     "tsx": "^4.19.4",

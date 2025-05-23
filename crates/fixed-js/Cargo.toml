@@ -1,5 +1,5 @@
 [package]
-name = "mantissa-js"
+name = "fixed-js"
 # This version will be overwritten by the build script to match the version in
 # the crate's package.json which is managed by changesets.
 version = "0.0.0"
@@ -18,7 +18,7 @@ default = ["console_error_panic_hook"]
 console_error_panic_hook = { version = "0.1.7", optional = true }
 ethers = { version = "2.0.14", default-features = false }
 js-sys = "0.3.69"
-ts-macro = { git = "https://github.com/ryangoree/wasm-utils-rs" }
+ts-macro = "1.0.1"
 utils-core = { git = "https://github.com/ryangoree/wasm-utils-rs" }
 wasm-bindgen = "0.2.92"
 
@@ -27,4 +27,4 @@ wasm-bindgen = "0.2.92"
 getrandom = { version = "0.2", features = ["js"] }
 rand = "0.8.5"
 
-mantissa = { path = "../mantissa" }
+fixed = { path = "../fixed" }

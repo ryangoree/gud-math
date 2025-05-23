@@ -1,7 +1,7 @@
-# Mantissa
+# @gud/fixed
 
-[![GitHub](https://img.shields.io/badge/ryangoree%2Fmantissa-151b23?logo=github)](https://github.com/ryangoree/mantissa)
-[![NPM Version](https://img.shields.io/badge/%40rygo%2Fmantissa-cb3837?logo=npm)](https://npmjs.com/package/@rygo/mantissa)
+[![GitHub](https://img.shields.io/badge/ryangoree%2Ffixed-151b23?logo=github)](https://github.com/ryangoree/fixed)
+[![NPM Version](https://img.shields.io/badge/%40gud%2Ffixed-cb3837?logo=npm)](https://npmjs.com/package/@gud/fixed)
 [![License: Apache-2.0](https://img.shields.io/badge/Apache%202.0-23454d?logo=apache)](./LICENSE)
 
 **Effortless fixed-point math in TypeScript powered by WASM.**
@@ -9,15 +9,15 @@
 ## Installing
 
 ```sh
-npm install @rygo/mantissa
+npm install @gud/fixed
 # or
-yarn add @rygo/mantissa
+yarn add @gud/fixed
 ```
 
 ## Usage
 
 ```ts
-import { fixed, parseFixed } from "@rygo/mantissa";
+import { fixed, parseFixed } from "@gud/fixed";
 
 const principal = fixed(1_000_123456789012345678n);;
 const rate = parseFixed(0.025); // parse unscaled values

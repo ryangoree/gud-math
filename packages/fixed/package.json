@@ -1,6 +1,6 @@
 {
-  "name": "@rygo/mantissa",
-  "version": "1.0.1",
+  "name": "@gud/fixed",
+  "version": "0.0.0",
   "description": "Effortless fixed-point math in TypeScript",
   "license": "Apache-2.0",
   "type": "module",
@@ -9,14 +9,14 @@
     "type": "git",
     "url": "https://github.com/ryangoree/mantissa"
   },
-  "main": "mantissa.cjs",
-  "types": "mantissa.d.ts",
+  "main": "fixed.cjs",
+  "types": "fixed.d.ts",
   "exports": {
     ".": {
       "default": {
-        "require": "./mantissa.cjs",
-        "import": "./mantissa.js",
-        "types": "./mantissa.d.ts"
+        "require": "./fixed.cjs",
+        "import": "./fixed.js",
+        "types": "./fixed.d.ts"
       }
     }
   },
