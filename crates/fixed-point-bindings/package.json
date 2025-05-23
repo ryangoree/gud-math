@@ -1,13 +1,13 @@
 {
-  "name": "fixed",
-  "version": "1.0.1",
+  "name": "fixed-point-bindings",
+  "version": "0.0.0",
   "description": "Effortless fixed-point math in TypeScript",
   "license": "Apache-2.0",
   "type": "module",
   "author": "Ryan Goree (https://github.com/ryangoree)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ryangoree/fixed"
+    "url": "https://github.com/ryangoree/gud-math"
   },
   "private": true,
   "scripts": {

@@ -6,7 +6,7 @@ use std::str::FromStr;
 
 use ethers::types::I256;
 use js_sys::{parse_float, BigInt, JsString};
-use fixed::{i256_from_str, ln, prelude::*};
+use fixed_point::{i256_from_str, ln, prelude::*};
 use rand::{thread_rng, Rng};
 use ts_macro::ts;
 use utils_core::{

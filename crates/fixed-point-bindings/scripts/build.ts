@@ -19,8 +19,10 @@ import './syncVersion.js';
 
 // Settings
 const tempDir = 'tmp';
-const packageName = '@gud/fixed';
+const packageName = '@gud/math';
 const outDir = '../../../packages/';
+const readmePath = '../../../README.md';
+const licensePath = '../../../LICENSE';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -115,7 +117,8 @@ try {
     resolve(tempDir, `${buildPrefix}_bg.wasm`),
     resolve(outPath, `${packageBaseName}_bg.wasm`)
   );
-  cpSync(resolve(__dirname, '../LICENSE'), resolve(outPath, 'LICENSE'));
+  cpSync(resolve(__dirname, licensePath), resolve(outPath, 'LICENSE'));
+  cpSync(resolve(__dirname, readmePath), resolve(outPath, 'README.md'));
 
   // 4. Remove the temporary build files.
   console.log('Removing temporary build files...');

@@ -1,7 +1,7 @@
-# @gud/fixed
+# @gud/math
 
-[![GitHub](https://img.shields.io/badge/ryangoree%2Ffixed-151b23?logo=github)](https://github.com/ryangoree/fixed)
-[![NPM Version](https://img.shields.io/badge/%40gud%2Ffixed-cb3837?logo=npm)](https://npmjs.com/package/@gud/fixed)
+[![GitHub](https://img.shields.io/badge/ryangoree%2Fgud--math-151b23?logo=github)](https://github.com/ryangoree/math)
+[![NPM Version](https://img.shields.io/badge/%40gud%2Fmath-cb3837?logo=npm)](https://npmjs.com/package/@gud/math)
 [![License: Apache-2.0](https://img.shields.io/badge/Apache%202.0-23454d?logo=apache)](./LICENSE)
 
 **Effortless fixed-point math in TypeScript powered by WASM.**
@@ -9,15 +9,15 @@
 ## Installing
 
 ```sh
-npm install @gud/fixed
+npm install @gud/math
 # or
-yarn add @gud/fixed
+yarn add @gud/math
 ```
 
 ## Usage
 
 ```ts
-import { fixed, parseFixed } from "@gud/fixed";
+import { fixed, parseFixed } from "@gud/math";
 
 const principal = fixed(1_000_123456789012345678n);;
 const rate = parseFixed(0.025); // parse unscaled values

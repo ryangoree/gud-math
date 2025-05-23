@@ -1,22 +1,22 @@
 {
-  "name": "@gud/fixed",
-  "version": "1.0.1",
+  "name": "@gud/math",
+  "version": "0.0.0",
   "description": "Effortless fixed-point math in TypeScript",
   "license": "Apache-2.0",
   "type": "module",
   "author": "Ryan Goree (https://github.com/ryangoree)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ryangoree/fixed"
+    "url": "https://github.com/ryangoree/gud-math"
   },
-  "main": "fixed.cjs",
-  "types": "fixed.d.ts",
+  "main": "math.cjs",
+  "types": "math.d.ts",
   "exports": {
     ".": {
       "default": {
-        "require": "./fixed.cjs",
-        "import": "./fixed.js",
-        "types": "./fixed.d.ts"
+        "require": "./math.cjs",
+        "import": "./math.js",
+        "types": "./math.d.ts"
       }
     }
   },

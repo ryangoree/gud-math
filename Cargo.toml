@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["crates/fixed", "crates/fixed-js"]
+members = ["crates/fixed-point", "crates/fixed-point-bindings"]
 
 [workspace.lints.clippy]
 comparison_chain = "allow"

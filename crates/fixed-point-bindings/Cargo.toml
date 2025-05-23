@@ -1,12 +1,12 @@
 [package]
-name = "fixed-js"
+name = "fixed-point-bindings"
 # This version will be overwritten by the build script to match the version in
 # the crate's package.json which is managed by changesets.
-version = "1.0.0"
+version = "0.0.0"
 edition = "2021"
 license = "AGPL-3.0"
 authors = ["Ryan Goree (https://github.com/ryangoree)"]
-description = "Effortless fixed-point math in TypeScript"
+description = "Bindings for the fixed-point crate"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
@@ -27,4 +27,4 @@ wasm-bindgen = "0.2.92"
 getrandom = { version = "0.2", features = ["js"] }
 rand = "0.8.5"
 
-fixed = { path = "../fixed" }
+fixed-point = { path = "../fixed-point" }
