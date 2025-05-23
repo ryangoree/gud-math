@@ -11,8 +11,8 @@
         "typescript": "^5.8.3",
       },
     },
-    "crates/mantissa.js": {
-      "name": "mantissa-src",
+    "crates/mantissa-js": {
+      "name": "mantissa",
       "version": "1.0.0",
       "devDependencies": {
         "@types/node": "^22.15.21",
@@ -25,10 +25,6 @@
         "wasm-pack": "^0.13.1",
         "wasm-pkg-build": "^0.5.3",
       },
-    },
-    "packages/mantissa": {
-      "name": "mantissa",
-      "version": "1.0.0",
     },
   },
   "packages": {
@@ -372,9 +368,7 @@
 
     "lru-cache": ["lru-cache@5.1.1", "", { "dependencies": { "yallist": "^3.0.2" } }, "sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w=="],
 
-    "mantissa": ["mantissa@workspace:packages/mantissa"],
-
-    "mantissa-src": ["mantissa-src@workspace:crates/mantissa.js"],
+    "mantissa": ["mantissa@workspace:crates/mantissa-js"],
 
     "math-intrinsics": ["math-intrinsics@1.1.0", "", {}, "sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g=="],
 

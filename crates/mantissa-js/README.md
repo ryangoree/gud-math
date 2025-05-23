@@ -1,19 +1,19 @@
-# fixedmath-js
+# Mantissa
 
 Effortless fixed-point math in TypeScript powered by WASM.
 
 ## Installing
 
 ```sh
-npm install mantissa
+npm install @rygo/mantissa
 # or
-yarn add mantissa
+yarn add @rygo/mantissa
 ```
 
 ## Usage
 
 ```ts
-import { fixed, parseFixed } from "mantissa";
+import { fixed, parseFixed } from "@rygo/mantissa";
 
 const principal = fixed(1_000_123456789012345678n);;
 const rate = parseFixed(0.025); // parse unscaled values

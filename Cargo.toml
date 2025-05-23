@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["crates/mantissa.rs", "crates/mantissa.js"]
+members = ["crates/mantissa", "crates/mantissa-js"]
 
 [workspace.lints.clippy]
 comparison_chain = "allow"

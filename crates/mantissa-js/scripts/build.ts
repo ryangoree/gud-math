@@ -2,6 +2,7 @@
 import assert from 'node:assert';
 import { execSync } from 'node:child_process';
 import {
+  cpSync,
   existsSync,
   mkdirSync,
   readFileSync,
@@ -9,7 +10,7 @@ import {
   rmSync,
   writeFileSync,
 } from 'node:fs';
-import { dirname, relative, resolve } from 'node:path';
+import { basename, dirname, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import lockfile from 'proper-lockfile';
 import TOML from 'smol-toml';
@@ -17,7 +18,7 @@ import manifest from '../package.json' with { type: 'json' };
 
 // Settings
 const tempDir = 'tmp';
-const packageName = 'mantissa';
+const packageName = '@rygo/mantissa';
 const outDir = '../../../packages/';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -25,7 +26,8 @@ const __dirname = dirname(__filename);
 try {
   const cwd = process.cwd();
   const script = relative(cwd, __filename);
-  const outPath = resolve(__dirname, outDir, packageName);
+  const packageBaseName = basename(packageName);
+  const outPath = resolve(__dirname, outDir, packageBaseName);
 
   // Lock the script to prevent concurrent builds
   const release = await lockfile.lock(__filename, {
@@ -75,15 +77,15 @@ try {
     ...manifest,
     name: packageName,
     // Add a main field for improved commonjs compatibility.
-    main: `${packageName}.cjs`,
-    types: `${packageName}.d.ts`,
+    main: `${packageBaseName}.cjs`,
+    types: `${packageBaseName}.d.ts`,
     // Add exports for both ESM and CJS compatibility for modern node versions.
     exports: {
       '.': {
         default: {
-          require: `./${packageName}.cjs`,
-          import: `./${packageName}.js`,
-          types: `./${packageName}.d.ts`,
+          require: `./${packageBaseName}.cjs`,
+          import: `./${packageBaseName}.js`,
+          types: `./${packageBaseName}.d.ts`,
         },
       },
     },
@@ -120,8 +122,16 @@ try {
   );
   renameSync(
     resolve(tempDir, `${buildPrefix}_bg.wasm`),
-    resolve(outPath, `${packageName}_bg.wasm`),
+    resolve(outPath, `${packageBaseName}_bg.wasm`),
   );
+  cpSync(
+    resolve(__dirname, '../LICENSE'),
+    resolve(outPath, 'LICENSE'),
+  )
+  cpSync(
+    resolve(__dirname, '../README.md'),
+    resolve(outPath, 'README.md'),
+  )
 
   // 5. Remove the temporary build files.
   console.log('Removing temporary build files...');
