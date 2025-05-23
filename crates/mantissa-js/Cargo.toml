@@ -2,7 +2,7 @@
 name = "mantissa-js"
 # This version will be overwritten by the build script to match the version in
 # the crate's package.json which is managed by changesets.
-version = "1.0.0"
+version = "0.0.0"
 edition = "2021"
 license = "AGPL-3.0"
 authors = ["Ryan Goree (https://github.com/ryangoree)"]
