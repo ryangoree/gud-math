@@ -1,6 +1,6 @@
 {
   "name": "@gud/fixed",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Effortless fixed-point math in TypeScript",
   "license": "Apache-2.0",
   "type": "module",
