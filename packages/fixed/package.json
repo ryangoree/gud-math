@@ -7,7 +7,7 @@
   "author": "Ryan Goree (https://github.com/ryangoree)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ryangoree/mantissa"
+    "url": "https://github.com/ryangoree/fixed"
   },
   "main": "fixed.cjs",
   "types": "fixed.d.ts",
