@@ -1,0 +1,17 @@
+{
+  "name": "examples",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "dev:watch": "tsx --watch src/index.ts"
+  },
+  "dependencies": {
+    "@rygo/mantissa": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}

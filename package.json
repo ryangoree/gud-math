@@ -3,11 +3,16 @@
   "version": "0.0.0",
   "license": "Apache-2.0",
   "private": true,
-  "workspaces": ["crates/*", "packages/*"],
+  "workspaces": [
+    "crates/*",
+    "packages/*"
+  ],
   "type": "module",
   "scripts": {
     "build": "bun run --filter \"./crates/*\" build",
     "watch": "bun run --filter \"./crates/*\" watch",
+    "dev": "bun run --cwd ./examples dev",
+    "dev:watch": "bun run --cwd ./examples dev:watch",
     "release": "sh scripts/release.sh",
     "reset-node-modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && yarn cache clean && yarn"
   },
