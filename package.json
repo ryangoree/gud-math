@@ -9,7 +9,7 @@
   ],
   "type": "module",
   "scripts": {
-    "build": "bun run --filter \"./crates/*\" build",
+    "compile": "bun run --filter \"./crates/*\" build",
     "watch": "bun run --filter \"./crates/*\" watch",
     "dev": "bun run --cwd ./examples dev",
     "dev:watch": "bun run --cwd ./examples dev:watch",
