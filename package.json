@@ -3,22 +3,11 @@
   "version": "0.0.0",
   "license": "Apache-2.0",
   "private": true,
-  "workspaces": [
-    "crates/*",
-    "packages/*"
-  ],
+  "workspaces": ["crates/*", "packages/*"],
   "type": "module",
   "scripts": {
     "build": "bun run --filter \"./crates/*\" build",
-    "watch": "turbo run watch --filter=./packages/*",
-    "test": "turbo run test",
-    "test:watch": "turbo run test:watch",
-    "format": "biome format --write",
-    "lint": "biome lint --diagnostic-level error .",
-    "lint:fix": "yarn lint --fix",
-    "lint:fix:unsafe": "yarn lint:fix --unsafe",
-    "typecheck": "turbo run typecheck",
-    "typecheck:watch": "turbo run typecheck:watch",
+    "watch": "bun run --filter \"./crates/*\" watch",
     "release": "sh scripts/release.sh",
     "reset-node-modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && yarn cache clean && yarn"
   },
@@ -26,7 +15,6 @@
     "@types/bun": "latest"
   },
   "peerDependencies": {
-    "@biomejs/biome": "^1.9.4",
     "@changesets/cli": "^2.29.4",
     "typescript": "^5.8.3"
   }

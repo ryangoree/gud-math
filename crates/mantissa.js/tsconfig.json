@@ -1,34 +1,28 @@
 {
-	"$schema": "https://json.schemastore.org/tsconfig",
-	"include": ["scripts"],
-	"compilerOptions": {
-		// Environment
-		"target": "esnext",
-		"lib": ["esnext"],
-		"module": "esnext",
-		"moduleDetection": "force",
-		"moduleResolution": "bundler",
-		"isolatedModules": true,
-		"resolveJsonModule": true,
-		"allowImportingTsExtensions": true,
-		"allowSyntheticDefaultImports": true,
-		"allowJs": true,
-		"baseUrl": ".",
-		"paths": {
-			"src/*": ["src/*"]
-		},
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "include": ["scripts"],
+  "compilerOptions": {
+    // Environment
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "module": "NodeNext",
+    "moduleDetection": "force",
+    "moduleResolution": "NodeNext",
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
 
-		// Type Checking
-		"skipLibCheck": true,
-		"checkJs": true,
-		"strict": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noUncheckedIndexedAccess": true,
-		"noFallthroughCasesInSwitch": true,
-		"noPropertyAccessFromIndexSignature": false,
+    // Type Checking
+    "skipLibCheck": true,
+    "checkJs": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noUncheckedIndexedAccess": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": false,
 
-		// Output
-		"noEmit": true
-	}
+    // Output
+    "noEmit": true
+  }
 }

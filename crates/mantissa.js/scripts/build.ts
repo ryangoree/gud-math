@@ -2,18 +2,18 @@
 import assert from 'node:assert';
 import { execSync } from 'node:child_process';
 import {
-	existsSync,
-	mkdirSync,
-	readFileSync,
-	renameSync,
-	rmSync,
-	writeFileSync,
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  renameSync,
+  rmSync,
+  writeFileSync,
 } from 'node:fs';
 import { dirname, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import lockfile from 'proper-lockfile';
 import TOML from 'smol-toml';
-import manifest from '../package.json';
+import manifest from '../package.json' with { type: 'json' };
 
 // Settings
 const tempDir = 'tmp';
@@ -57,8 +57,8 @@ try {
     cargoTomlSrc.replace(
       // https://regex101.com/r/PLmbXb/1
       /^version(\s*)=(\s*)"[^"]+"/m,
-      `version$1=$2"${manifest.version}"`
-    )
+      `version$1=$2"${manifest.version}"`,
+    ),
   );
 
   // 2. Build the wasm package.
@@ -66,7 +66,7 @@ try {
   run(`npx wasm-pkg-build --modules cjs,esm-sync --out-dir ${tempDir}`);
   assert(
     existsSync(tempDir),
-    `Error: Build failed. The output directory ${tempDir} does not exist.`
+    `Error: Build failed. The output directory ${tempDir} does not exist.`,
   );
 
   // 3. Modify the package.json file.
@@ -104,23 +104,23 @@ try {
   mkdirSync(outPath, { recursive: true });
   writeFileSync(
     resolve(outPath, 'package.json'),
-    JSON.stringify(modifiedManifest, null, 2)
+    JSON.stringify(modifiedManifest, null, 2),
   );
   renameSync(
     resolve(tempDir, `${buildPrefix}_worker.js`),
-    resolve(outPath, manifestExports.import)
+    resolve(outPath, manifestExports.import),
   );
   renameSync(
     resolve(tempDir, `${buildPrefix}.js`),
-    resolve(outPath, manifestExports.require)
+    resolve(outPath, manifestExports.require),
   );
   renameSync(
     resolve(tempDir, `${buildPrefix}.d.ts`),
-    resolve(outPath, manifestExports.types)
+    resolve(outPath, manifestExports.types),
   );
   renameSync(
     resolve(tempDir, `${buildPrefix}_bg.wasm`),
-    resolve(outPath, `${packageName}_bg.wasm`)
+    resolve(outPath, `${packageName}_bg.wasm`),
   );
 
   // 5. Remove the temporary build files.
