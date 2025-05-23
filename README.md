@@ -2,6 +2,7 @@
 
 [![NPM Version](https://img.shields.io/npm/v/%40rygo%2Fmantissa?color=cb3837)](https://npmjs.com/package/@rygo/mantissa)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-23454d)](./LICENSE)
+[![GitHub](https://img.shields.io/badge/GitHub-ryangoree%2Fmantissa-151b23)](https://github.com/ryangoree/mantissa)
 
 **Effortless fixed-point math in TypeScript powered by WASM.**
 
