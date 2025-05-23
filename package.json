@@ -14,6 +14,7 @@
     "dev": "bun run --cwd ./examples dev",
     "dev:watch": "bun run --cwd ./examples dev:watch",
     "release": "sh scripts/release.sh",
+    "sync-version": "bun run --filter \"./crates/*\" sync-version",
     "reset-node-modules": "rm -f ./bun.lock && find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && bun i"
   },
   "devDependencies": {

@@ -12,6 +12,7 @@
   "private": true,
   "scripts": {
     "build": "tsx scripts/build.ts",
+    "sync-version": "tsx scripts/syncVersion.ts",
     "watch": "bun run build && onchange 'src/**/*.rs' -- bun run build"
   },
   "devDependencies": {

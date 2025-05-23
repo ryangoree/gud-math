@@ -15,6 +15,7 @@ import { fileURLToPath } from 'node:url';
 import lockfile from 'proper-lockfile';
 import TOML from 'smol-toml';
 import manifest from '../package.json' with { type: 'json' };
+import './syncVersion.js';
 
 // Settings
 const tempDir = 'tmp';
@@ -53,25 +54,15 @@ try {
 	|  Out path:    ${relative(cwd, outPath)}
 	+`);
 
-  // 1. Sync the cargo.toml version with the package.json
-  writeFileSync(
-    cargoManifestPath,
-    cargoTomlSrc.replace(
-      // https://regex101.com/r/PLmbXb/1
-      /^version(\s*)=(\s*)"[^"]+"/m,
-      `version$1=$2"${manifest.version}"`,
-    ),
-  );
-
-  // 2. Build the wasm package.
+  // 1. Build the wasm package.
   console.log('Building package...');
   run(`npx wasm-pkg-build --modules cjs,esm-sync --out-dir ${tempDir}`);
   assert(
     existsSync(tempDir),
-    `Error: Build failed. The output directory ${tempDir} does not exist.`,
+    `Error: Build failed. The output directory ${tempDir} does not exist.`
   );
 
-  // 3. Modify the package.json file.
+  // 2. Modify the package.json file.
   console.log('Modifying package.json...');
   const modifiedManifest = {
     ...manifest,
@@ -100,40 +91,37 @@ try {
     devDependencies: undefined,
   };
 
-  // 4. Copy generated files to the output directory.
+  // 3. Copy generated files to the output directory.
   const buildPrefix = cargoToml.package.name.replaceAll('-', '_');
   const manifestExports = modifiedManifest.exports['.'].default;
   mkdirSync(outPath, { recursive: true });
   writeFileSync(
     resolve(outPath, 'package.json'),
-    JSON.stringify(modifiedManifest, null, 2),
+    JSON.stringify(modifiedManifest, null, 2)
   );
   renameSync(
     resolve(tempDir, `${buildPrefix}_worker.js`),
-    resolve(outPath, manifestExports.import),
+    resolve(outPath, manifestExports.import)
   );
   renameSync(
     resolve(tempDir, `${buildPrefix}.js`),
-    resolve(outPath, manifestExports.require),
+    resolve(outPath, manifestExports.require)
   );
   renameSync(
     resolve(tempDir, `${buildPrefix}.d.ts`),
-    resolve(outPath, manifestExports.types),
+    resolve(outPath, manifestExports.types)
   );
   renameSync(
     resolve(tempDir, `${buildPrefix}_bg.wasm`),
-    resolve(outPath, `${packageBaseName}_bg.wasm`),
+    resolve(outPath, `${packageBaseName}_bg.wasm`)
   );
-  cpSync(
-    resolve(__dirname, '../LICENSE'),
-    resolve(outPath, 'LICENSE'),
-  )
+  cpSync(resolve(__dirname, '../LICENSE'), resolve(outPath, 'LICENSE'));
 
-  // 5. Remove the temporary build files.
+  // 4. Remove the temporary build files.
   console.log('Removing temporary build files...');
   rmSync(tempDir, { recursive: true });
 
-  // 6. Release the lockfile
+  // 5. Release the lockfile
   release();
 
   // Done!
