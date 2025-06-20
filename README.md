@@ -1,4 +1,4 @@
-# @gud/math
+# Gud Math
 
 [![GitHub](https://img.shields.io/badge/ryangoree%2Fgud--math-151b23?logo=github)](https://github.com/ryangoree/gud-math)
 [![NPM Version](https://img.shields.io/badge/%40gud%2Fmath-cb3837?logo=npm)](https://npmjs.com/package/@gud/math)
