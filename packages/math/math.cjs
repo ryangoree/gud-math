@@ -165,15 +165,14 @@ function debugString(val) {
 */
 
 /**
-* Create a new fixed-point number from a scaled value or another
-* fixed-point number. If the value is already a fixed-point number, the
-* number of decimal places will be adjusted to match the new value.
+* Create a new fixed-point number from a scaled value or another fixed-point number. If the value
+* is already a fixed-point number instance, the number of decimal places will be adjusted to match
+* the new value.
 *
-* @param value - A scaled value between `-2^255` and `2^255 - 1` (signed
-* 256-bit integer, i.e., `int256`).
+* @param value - A scaled value between `-2^255` and `2^255 - 1` (signed 256-bit integer, i.e.,
+* `int256`).
 *
-* @param decimals - The number of decimal places to use. Max is `18`.
-* Defaults to `18`.
+* @param decimals - The number of decimal places to use. Max is `18`. Defaults to `18`.
 *
 * @example
 * ```js
@@ -197,13 +196,12 @@ function debugString(val) {
 */
 
 /**
-* Create a fixed-point number by parsing a decimal value and scaling it by a
-* given number of decimal places.
+* Create a fixed-point number by parsing a decimal value and scaling it by a given number of
+* decimal places.
 *
 * @param value - A value to parse and scale.
 *
-* @param decimals - The number of decimal places to use. Max is `18`. Defaults
-* to `18`.
+* @param decimals - The number of decimal places to use. Max is `18`. Defaults to `18`.
 *
 * @example
 * ```js
@@ -447,15 +445,14 @@ class FixedPoint {
     }
   }
   /**
-  * Create a new fixed-point number from a scaled value or another
-  * fixed-point number. If the value is already a fixed-point number, the
-  * number of decimal places will be adjusted to match the new value.
+  * Create a new fixed-point number from a scaled value or another fixed-point number. If the
+  * value is already a fixed-point number, the number of decimal places will be adjusted to
+  * match the new value.
   *
-  * @param value - A scaled value between `-2^255` and `2^255 - 1` (signed
-  * 256-bit integer, i.e., `int256`).
+  * @param value - A scaled value between `-2^255` and `2^255 - 1` (signed 256-bit integer,
+  * i.e., `int256`).
   *
-  * @param decimals - The number of decimal places to use. Max is `18`.
-  * Defaults to `18`.
+  * @param decimals - The number of decimal places to use. Max is `18`. Defaults to `18`.
   *
   * @example
   * ```js
@@ -493,13 +490,12 @@ class FixedPoint {
     }
   }
   /**
-  * Create a fixed-point number by parsing a decimal value and scaling it by
-  * a given number of decimal places.
+  * Create a fixed-point number by parsing a decimal value and scaling it by a given number of
+  * decimal places.
   *
   * @param value - A value to parse and scale.
   *
-  * @param decimals - The number of decimal places to use. Max is `18`.
-  * Defaults to `18`.
+  * @param decimals - The number of decimal places to use. Max is `18`. Defaults to `18`.
   *
   * @example
   * ```js
@@ -535,8 +531,7 @@ class FixedPoint {
   /**
   * Create a fixed-point number representing one unit.
   *
-  * @param decimals - The number of decimal places to use. Max is `18`.
-  * Defaults to `18`.
+  * @param decimals - The number of decimal places to use. Max is `18`. Defaults to `18`.
   */
   static one(decimals) {
     try {
@@ -678,8 +673,7 @@ class FixedPoint {
     }
   }
   /**
-  * Multiply this fixed-point number by another, then divide by a divisor,
-  * rounding down.
+  * Multiply this fixed-point number by another, then divide by a divisor, rounding down.
   */
   mulDivDown(other, divisor, decimals) {
     try {
@@ -697,8 +691,7 @@ class FixedPoint {
     }
   }
   /**
-  * Multiply this fixed-point number by another, then divide by a divisor,
-  * rounding up.
+  * Multiply this fixed-point number by another, then divide by a divisor, rounding up.
   */
   mulDivUp(other, divisor, decimals) {
     try {
@@ -1026,8 +1019,7 @@ class FixedPoint {
     }
   }
   /**
-  * Create a new fixed-point number from this one, with a given number of
-  * decimal places.
+  * Create a new fixed-point number from this one, with a given number of decimal places.
   *
   * @example
   * ```ts
@@ -1062,8 +1054,8 @@ class FixedPoint {
     return ret;
   }
   /**
-  * Get the scaled hexadecimal string representation of this fixed-point
-  * number with the `0x` prefix.
+  * Get the scaled hexadecimal string representation of this fixed-point number with the `0x`
+  * prefix.
   *
   * @example
   * ```ts
@@ -1173,40 +1165,40 @@ class FixedPoint {
   }
 }
 module.exports.FixedPoint = FixedPoint;
-module.exports.__wbg_decimals_b140414b2d61706b = function (arg0) {
+module.exports.__wbg_decimals_2f43dd4d1fdf6367 = function (arg0) {
   const ret = getObject(arg0).decimals;
   return isLikeNone(ret) ? 0xFFFFFF : ret;
 };
-module.exports.__wbg_trailingzeros_ae7ae43b3a5bdb44 = function (arg0) {
+module.exports.__wbg_trailingzeros_f4e3341d27aefd03 = function (arg0) {
   const ret = getObject(arg0).trailingZeros;
   return isLikeNone(ret) ? 0xFFFFFF : ret ? 1 : 0;
 };
-module.exports.__wbg_rounding_f937e4554aec0438 = function (arg0, arg1) {
+module.exports.__wbg_rounding_8f72f619aab379f7 = function (arg0, arg1) {
   const ret = getObject(arg1).rounding;
   var ptr1 = isLikeNone(ret) ? 0 : passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
   var len1 = WASM_VECTOR_LEN;
   getInt32Memory0()[arg0 / 4 + 1] = len1;
   getInt32Memory0()[arg0 / 4 + 0] = ptr1;
 };
-module.exports.__wbg_locale_9cb61da7a116c36b = function (arg0, arg1) {
+module.exports.__wbg_locale_b5d0bf0e2082348f = function (arg0, arg1) {
   const ret = getObject(arg1).locale;
   var ptr1 = isLikeNone(ret) ? 0 : passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
   var len1 = WASM_VECTOR_LEN;
   getInt32Memory0()[arg0 / 4 + 1] = len1;
   getInt32Memory0()[arg0 / 4 + 0] = ptr1;
 };
-module.exports.__wbg_group_184852a27b5e8978 = function (arg0) {
+module.exports.__wbg_group_27f7a8e8b83334ee = function (arg0) {
   const ret = getObject(arg0).group;
   return isLikeNone(ret) ? 0xFFFFFF : ret ? 1 : 0;
 };
-module.exports.__wbg_compactdisplay_0ed3ec040b5e1f6b = function (arg0, arg1) {
+module.exports.__wbg_compactdisplay_2f66d09103d2648e = function (arg0, arg1) {
   const ret = getObject(arg1).compactDisplay;
   var ptr1 = isLikeNone(ret) ? 0 : passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
   var len1 = WASM_VECTOR_LEN;
   getInt32Memory0()[arg0 / 4 + 1] = len1;
   getInt32Memory0()[arg0 / 4 + 0] = ptr1;
 };
-module.exports.__wbg_percent_145417c52d2d5416 = function (arg0) {
+module.exports.__wbg_percent_fb11e65adcc85b7b = function (arg0) {
   const ret = getObject(arg0).percent;
   return isLikeNone(ret) ? 0xFFFFFF : ret ? 1 : 0;
 };
@@ -1217,18 +1209,18 @@ module.exports.__wbindgen_string_new = function (arg0, arg1) {
 module.exports.__wbindgen_object_drop_ref = function (arg0) {
   takeObject(arg0);
 };
-module.exports.__wbg_currency_f7e753566807a649 = function (arg0, arg1) {
+module.exports.__wbg_currency_49fb66a544978e63 = function (arg0, arg1) {
   const ret = getObject(arg1).currency;
   var ptr1 = isLikeNone(ret) ? 0 : passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
   var len1 = WASM_VECTOR_LEN;
   getInt32Memory0()[arg0 / 4 + 1] = len1;
   getInt32Memory0()[arg0 / 4 + 0] = ptr1;
 };
-module.exports.__wbg_compact_7d4f5b0e2e9d8dfc = function (arg0) {
+module.exports.__wbg_compact_ef12a2172bc25f6c = function (arg0) {
   const ret = getObject(arg0).compact;
   return isLikeNone(ret) ? 0xFFFFFF : ret ? 1 : 0;
 };
-module.exports.__wbg_display_626232f88a922c37 = function (arg0, arg1) {
+module.exports.__wbg_display_b0148e215d404031 = function (arg0, arg1) {
   const ret = getObject(arg1).display;
   var ptr1 = isLikeNone(ret) ? 0 : passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
   var len1 = WASM_VECTOR_LEN;
@@ -1239,11 +1231,11 @@ module.exports.__wbindgen_number_new = function (arg0) {
   const ret = arg0;
   return addHeapObject(ret);
 };
-module.exports.__wbg_isfixedpoint_4eff246270f80615 = function (arg0) {
+module.exports.__wbg_isfixedpoint_19f124c98ac817ce = function (arg0) {
   const ret = getObject(arg0).is_fixed_point;
   return isLikeNone(ret) ? 0xFFFFFF : ret ? 1 : 0;
 };
-module.exports.__wbg_toString_a3a4048baceccce8 = function (arg0) {
+module.exports.__wbg_toString_1c41e4f4393a1099 = function (arg0) {
   const ret = getObject(arg0).toString();
   return addHeapObject(ret);
 };
@@ -1255,15 +1247,15 @@ module.exports.__wbindgen_string_get = function (arg0, arg1) {
   getInt32Memory0()[arg0 / 4 + 1] = len1;
   getInt32Memory0()[arg0 / 4 + 0] = ptr1;
 };
-module.exports.__wbg_min_99a1706ae1512bbb = function (arg0) {
+module.exports.__wbg_min_da24fabad8926257 = function (arg0) {
   const ret = getObject(arg0).min;
   return isLikeNone(ret) ? 0 : addHeapObject(ret);
 };
-module.exports.__wbg_max_000206169f61b8cb = function (arg0) {
+module.exports.__wbg_max_446e8681ca2c03ca = function (arg0) {
   const ret = getObject(arg0).max;
   return isLikeNone(ret) ? 0 : addHeapObject(ret);
 };
-module.exports.__wbg_decimals_3b9038069ebcf54d = function (arg0) {
+module.exports.__wbg_decimals_24e984a9852b92f6 = function (arg0) {
   const ret = getObject(arg0).decimals;
   return isLikeNone(ret) ? 0xFFFFFF : ret;
 };

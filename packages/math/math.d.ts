@@ -8,15 +8,14 @@ export function initialize(): void;
 */
 export function getVersion(): string;
 /**
-* Create a new fixed-point number from a scaled value or another
-* fixed-point number. If the value is already a fixed-point number, the
-* number of decimal places will be adjusted to match the new value.
+* Create a new fixed-point number from a scaled value or another fixed-point number. If the value
+* is already a fixed-point number instance, the number of decimal places will be adjusted to match
+* the new value.
 *
-* @param value - A scaled value between `-2^255` and `2^255 - 1` (signed
-* 256-bit integer, i.e., `int256`).
+* @param value - A scaled value between `-2^255` and `2^255 - 1` (signed 256-bit integer, i.e.,
+* `int256`).
 *
-* @param decimals - The number of decimal places to use. Max is `18`.
-* Defaults to `18`.
+* @param decimals - The number of decimal places to use. Max is `18`. Defaults to `18`.
 *
 * @example
 * ```js
@@ -40,13 +39,12 @@ export function getVersion(): string;
 */
 export function fixed(value: Numberish, decimals?: number): FixedPoint;
 /**
-* Create a fixed-point number by parsing a decimal value and scaling it by a
-* given number of decimal places.
+* Create a fixed-point number by parsing a decimal value and scaling it by a given number of
+* decimal places.
 *
 * @param value - A value to parse and scale.
 *
-* @param decimals - The number of decimal places to use. Max is `18`. Defaults
-* to `18`.
+* @param decimals - The number of decimal places to use. Max is `18`. Defaults to `18`.
 *
 * @example
 * ```js
@@ -132,55 +130,47 @@ interface IBaseFormatOptions {
    *
    * `"ceil"`:
    *
-   * Round toward +∞. Positive values round up. Negative values round "more
-   * positive".
+   * Round toward +∞. Positive values round up. Negative values round "more positive".
    *
    * `"floor"`:
    *
-   * Round toward -∞. Positive values round down. Negative values round "more
-   * negative".
+   * Round toward -∞. Positive values round down. Negative values round "more negative".
    *
    * `"expand"`:
    *
-   * round away from 0. The magnitude of the value is always increased by
-   * rounding. Positive values round up. Negative values round "more
-   * negative".
+   * round away from 0. The magnitude of the value is always increased by rounding. Positive
+   * values round up. Negative values round "more negative".
    *
    * `"trunc"`:
    *
-   * Round toward 0. This magnitude of the value is always reduced by
-   * rounding. Positive values round down. Negative values round "less
-   * negative".
+   * Round toward 0. This magnitude of the value is always reduced by rounding. Positive values
+   * round down. Negative values round "less negative".
    *
    * `"halfCeil"`:
    *
-   * ties toward +∞. Values above the half-increment round like `ceil`
-   * (towards +∞), and below like `floor` (towards -∞). On the
-   * half-increment, values round like `ceil`.
+   * ties toward +∞. Values above the half-increment round like `ceil` (towards +∞), and below
+   * like `floor` (towards -∞). On the half-increment, values round like `ceil`.
    *
    * `"halfFloor"`:
    *
-   * Ties toward -∞. Values above the half-increment round like `ceil`
-   * (towards +∞), and below like `floor` (towards -∞). On the
-   * half-increment, values round like `floor`.
+   * Ties toward -∞. Values above the half-increment round like `ceil` (towards +∞), and below
+   * like `floor` (towards -∞). On the half-increment, values round like `floor`.
    *
    * `"halfExpand"`:
    *
-   * Ties away from 0. Values above the half-increment round like `expand`
-   * (away from zero), and below like `trunc` (towards 0). On the
-   * half-increment, values round like `expand`.
+   * Ties away from 0. Values above the half-increment round like `expand` (away from zero), and
+   * below like `trunc` (towards 0). On the half-increment, values round like `expand`.
    *
    * `"halfTrunc"`:
    *
-   * Ties toward 0. Values above the half-increment round like `expand` (away
-   * from zero), and below like `trunc` (towards 0). On the half-increment,
-   * values round like `trunc`.
+   * Ties toward 0. Values above the half-increment round like `expand` (away from zero), and
+   * below like `trunc` (towards 0). On the half-increment, values round like `trunc`.
    *
    * `"halfEven"`:
    *
-   * Ties towards the nearest even integer. Values above the half-increment
-   * round like `expand` (away from zero), and below like `trunc` (towards
-   * 0). On the half-increment values round towards the nearest even digit.
+   * Ties towards the nearest even integer. Values above the half-increment round like `expand`
+   * (away from zero), and below like `trunc` (towards 0). On the half-increment values round
+   * towards the nearest even digit.
    *
    * @default "halfExpand"
    *
@@ -265,15 +255,14 @@ export class FixedPoint {
 */
   constructor(value: Numberish, decimals?: number);
 /**
-* Create a new fixed-point number from a scaled value or another
-* fixed-point number. If the value is already a fixed-point number, the
-* number of decimal places will be adjusted to match the new value.
+* Create a new fixed-point number from a scaled value or another fixed-point number. If the
+* value is already a fixed-point number, the number of decimal places will be adjusted to
+* match the new value.
 *
-* @param value - A scaled value between `-2^255` and `2^255 - 1` (signed
-* 256-bit integer, i.e., `int256`).
+* @param value - A scaled value between `-2^255` and `2^255 - 1` (signed 256-bit integer,
+* i.e., `int256`).
 *
-* @param decimals - The number of decimal places to use. Max is `18`.
-* Defaults to `18`.
+* @param decimals - The number of decimal places to use. Max is `18`. Defaults to `18`.
 *
 * @example
 * ```js
@@ -297,13 +286,12 @@ export class FixedPoint {
 */
   static from(value: Numberish, decimals?: number): FixedPoint;
 /**
-* Create a fixed-point number by parsing a decimal value and scaling it by
-* a given number of decimal places.
+* Create a fixed-point number by parsing a decimal value and scaling it by a given number of
+* decimal places.
 *
 * @param value - A value to parse and scale.
 *
-* @param decimals - The number of decimal places to use. Max is `18`.
-* Defaults to `18`.
+* @param decimals - The number of decimal places to use. Max is `18`. Defaults to `18`.
 *
 * @example
 * ```js
@@ -325,8 +313,7 @@ export class FixedPoint {
 /**
 * Create a fixed-point number representing one unit.
 *
-* @param decimals - The number of decimal places to use. Max is `18`.
-* Defaults to `18`.
+* @param decimals - The number of decimal places to use. Max is `18`. Defaults to `18`.
 */
   static one(decimals?: number): FixedPoint;
 /**
@@ -360,13 +347,11 @@ export class FixedPoint {
 */
   sub(other: Numberish, decimals?: number): FixedPoint;
 /**
-* Multiply this fixed-point number by another, then divide by a divisor,
-* rounding down.
+* Multiply this fixed-point number by another, then divide by a divisor, rounding down.
 */
   mulDivDown(other: Numberish, divisor: Numberish, decimals?: number): FixedPoint;
 /**
-* Multiply this fixed-point number by another, then divide by a divisor,
-* rounding up.
+* Multiply this fixed-point number by another, then divide by a divisor, rounding up.
 */
   mulDivUp(other: Numberish, divisor: Numberish, decimals?: number): FixedPoint;
 /**
@@ -442,8 +427,7 @@ export class FixedPoint {
 */
   clamp(min: Numberish, max: Numberish, decimals?: number): FixedPoint;
 /**
-* Create a new fixed-point number from this one, with a given number of
-* decimal places.
+* Create a new fixed-point number from this one, with a given number of decimal places.
 *
 * @example
 * ```ts
@@ -472,8 +456,8 @@ export class FixedPoint {
 */
   toNumber(): number;
 /**
-* Get the scaled hexadecimal string representation of this fixed-point
-* number with the `0x` prefix.
+* Get the scaled hexadecimal string representation of this fixed-point number with the `0x`
+* prefix.
 *
 * @example
 * ```ts
