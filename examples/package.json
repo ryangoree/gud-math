@@ -8,7 +8,7 @@
     "dev:watch": "tsx --watch src/index.ts"
   },
   "dependencies": {
-    "@gud/fixed": "workspace:*"
+    "@gud/math": "workspace:*"
   },
   "devDependencies": {
     "tsx": "^4.20.3",
