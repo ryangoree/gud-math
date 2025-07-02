@@ -24,8 +24,8 @@ use crate::{FixedPoint, FixedPointValue};
 /// - `MAX_DECIMALS`: *(Optional)* The maximum number of decimal places the value can support.
 /// - `from`: *(Optional)* Other types that can convert to the given type.
 /// - `try_from`: *(Optional)* Other types that can try to convert to the given type.
-/// - `via_try_from`: *(Optional)* Other types that can try to convert to the
-///   given type via an intermediate type.
+/// - `via_try_from`: *(Optional)* Other types that can try to convert to the given type via an
+///   intermediate type.
 #[macro_export]
 macro_rules! fixed_point_value_impl {
     (

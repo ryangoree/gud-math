@@ -41,7 +41,7 @@ impl WasmFixedPoint {
         let formatter = Intl::NumberFormat::new(&locales_arr, &options_obj);
         Ok(formatter
             .format()
-            .call1(&JsValue::NULL, &self.to_string().into())
+            .call1(&JsValue::NULL, &self.to_string_js().into())
             .to_result()?
             .into())
     }
@@ -82,7 +82,7 @@ impl WasmFixedPoint {
         let formatter = Intl::NumberFormat::new(&locales_arr, &options_obj);
         Ok(formatter
             .format()
-            .call1(&JsValue::NULL, &self.to_string().into())
+            .call1(&JsValue::NULL, &self.to_string_js().into())
             .to_result()?
             .into())
     }
@@ -146,55 +146,47 @@ struct BaseFormatOptions {
     ///
     /// `"ceil"`:
     ///
-    /// Round toward +∞. Positive values round up. Negative values round "more
-    /// positive".
+    /// Round toward +∞. Positive values round up. Negative values round "more positive".
     ///
     /// `"floor"`:
     ///
-    /// Round toward -∞. Positive values round down. Negative values round "more
-    /// negative".
+    /// Round toward -∞. Positive values round down. Negative values round "more negative".
     ///
     /// `"expand"`:
     ///
-    /// round away from 0. The magnitude of the value is always increased by
-    /// rounding. Positive values round up. Negative values round "more
-    /// negative".
+    /// round away from 0. The magnitude of the value is always increased by rounding. Positive
+    /// values round up. Negative values round "more negative".
     ///
     /// `"trunc"`:
     ///
-    /// Round toward 0. This magnitude of the value is always reduced by
-    /// rounding. Positive values round down. Negative values round "less
-    /// negative".
+    /// Round toward 0. This magnitude of the value is always reduced by rounding. Positive values
+    /// round down. Negative values round "less negative".
     ///
     /// `"halfCeil"`:
     ///
-    /// ties toward +∞. Values above the half-increment round like `ceil`
-    /// (towards +∞), and below like `floor` (towards -∞). On the
-    /// half-increment, values round like `ceil`.
+    /// ties toward +∞. Values above the half-increment round like `ceil` (towards +∞), and below
+    /// like `floor` (towards -∞). On the half-increment, values round like `ceil`.
     ///
     /// `"halfFloor"`:
     ///
-    /// Ties toward -∞. Values above the half-increment round like `ceil`
-    /// (towards +∞), and below like `floor` (towards -∞). On the
-    /// half-increment, values round like `floor`.
+    /// Ties toward -∞. Values above the half-increment round like `ceil` (towards +∞), and below
+    /// like `floor` (towards -∞). On the half-increment, values round like `floor`.
     ///
     /// `"halfExpand"`:
     ///
-    /// Ties away from 0. Values above the half-increment round like `expand`
-    /// (away from zero), and below like `trunc` (towards 0). On the
-    /// half-increment, values round like `expand`.
+    /// Ties away from 0. Values above the half-increment round like `expand` (away from zero), and
+    /// below like `trunc` (towards 0). On the half-increment, values round like `expand`.
     ///
     /// `"halfTrunc"`:
     ///
-    /// Ties toward 0. Values above the half-increment round like `expand` (away
-    /// from zero), and below like `trunc` (towards 0). On the half-increment,
-    /// values round like `trunc`.
+    /// Ties toward 0. Values above the half-increment round like `expand` (away from zero), and
+    /// below like `trunc` (towards 0). On the half-increment, values round like `trunc`.
     ///
     /// `"halfEven"`:
     ///
-    /// Ties towards the nearest even integer. Values above the half-increment
-    /// round like `expand` (away from zero), and below like `trunc` (towards
-    /// 0). On the half-increment values round towards the nearest even digit.
+    /// Ties towards the nearest even integer. Values above the half-increment round like `expand`
+    /// (away from zero), and below like `trunc` (towards 0). On the half-increment values round
+    /// towards the nearest even digit.
     ///
     /// @default "halfExpand"
     ///

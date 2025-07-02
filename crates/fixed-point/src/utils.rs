@@ -5,8 +5,7 @@ use eyre::{bail, Result};
 
 use crate::{int256, uint256};
 
-/// Parses a string into a U256 with support for scientific and decimal
-/// notation.
+/// Parses a string into a U256 with support for scientific and decimal notation.
 ///
 /// ## Example
 ///
@@ -18,8 +17,8 @@ use crate::{int256, uint256};
 /// assert_eq!(u, U256::from(11) * U256::from(10).pow(U256::from(17)));
 /// ```
 pub fn u256_from_str(s: &str) -> Result<U256> {
-    // Parse a string into a mantissa and an exponent. The U256 arithmetic will
-    // overflow if the mantissa or the exponent are too large.
+    // Parse a string into a mantissa and an exponent. The U256 arithmetic will overflow if the
+    // mantissa or the exponent are too large.
     let mut found_dot = false;
     let mut found_e = false;
     let mut mantissa = ethers::types::U256::zero();
@@ -46,9 +45,8 @@ pub fn u256_from_str(s: &str) -> Result<U256> {
         }
     }
 
-    // Combine the mantissa and the exponent into a single U256. This will
-    // overflow if the exponent is too large. We also need to make sure that the
-    // final result is an integer.
+    // Combine the mantissa and the exponent into a single U256. This will overflow if the exponent
+    // is too large. We also need to make sure that the final result is an integer.
     let decimals = ethers::types::U256::from(decimals);
     if exponent < decimals {
         bail!("Exponent {exponent} is too small for U256: {s}");
@@ -57,8 +55,7 @@ pub fn u256_from_str(s: &str) -> Result<U256> {
     Ok(mantissa * ethers::types::U256::from(10).pow(exponent - decimals))
 }
 
-/// Parse a string into an I256 with support for scientific and decimal
-/// notation.
+/// Parse a string into an I256 with support for scientific and decimal notation.
 ///
 /// ## Example
 ///
@@ -70,8 +67,8 @@ pub fn u256_from_str(s: &str) -> Result<U256> {
 /// assert_eq!(i, -I256::from(11) * I256::from(10).pow(17));
 /// ```
 pub fn i256_from_str(s: &str) -> Result<I256> {
-    // Parse a string into a mantissa and an exponent. The U256 arithmetic will
-    // overflow if the mantissa or the exponent are too large.
+    // Parse a string into a mantissa and an exponent. The U256 arithmetic will overflow if the
+    // mantissa or the exponent are too large.
     let mut sign = ethers::types::I256::one();
     let mut found_dot = false;
     let mut found_e = false;
@@ -101,9 +98,8 @@ pub fn i256_from_str(s: &str) -> Result<I256> {
         }
     }
 
-    // Combine the mantissa and the exponent I256. This will overflow if the
-    // exponent is too large. We also need to make sure that the final result is
-    // an integer.
+    // Combine the mantissa and the exponent I256. This will overflow if the exponent is too large.
+    // We also need to make sure that the final result is an integer.
     if exponent < decimals {
         bail!("Exponent {exponent} is too small for I256: {s}");
     }
@@ -111,29 +107,29 @@ pub fn i256_from_str(s: &str) -> Result<I256> {
     Ok(sign * mantissa * ethers::types::I256::from(10).pow(exponent - decimals))
 }
 
-/// Math
+// Math //
 
 pub fn exp(mut x: I256) -> Result<I256> {
-    // When the result is < 0.5 we return zero. This happens when x <=
-    // floor(log(0.5e18) * 1e18) ~ -42e18
+    // When the result is < 0.5 we return zero. This happens when x <= floor(log(0.5e18) * 1e18) ~
+    // -42e18
     if x <= I256::from(-42139678854452767551_i128) {
         return Ok(I256::zero());
     }
 
-    // When the result is > (2**255 - 1) / 1e18 we can not represent it as an
-    // int. This happens when x >= floor(log((2**255 - 1) / 1e18) * 1e18) ~ 135.
+    // When the result is > (2**255 - 1) / 1e18 we can not represent it as an int. This happens when
+    // x >= floor(log((2**255 - 1) / 1e18) * 1e18) ~ 135.
     if x >= int256!(135305999368893231589) {
         bail!("invalid exponent {x}");
     }
 
-    // x is now in the range (-42, 136) * 1e18. Convert to (-42, 136) * 2**96
-    // for more intermediate precision and a binary basis. This base conversion
-    // is a multiplication by 1e18 / 2**96 = 5**18 / 2**78.
+    // x is now in the range (-42, 136) * 1e18. Convert to (-42, 136) * 2**96 for more intermediate
+    // precision and a binary basis. This base conversion is a multiplication by 1e18 / 2**96 =
+    // 5**18 / 2**78.
     x = x.wrapping_shl(78) / int256!(5).pow(18);
 
-    // Reduce range of x to (-½ ln 2, ½ ln 2) * 2**96 by factoring out powers of
-    // two such that exp(x) = exp(x') * 2**k, where k is an integer. Solving
-    // this gives k = round(x / log(2)) and x' = x - k * log(2).
+    // Reduce range of x to (-½ ln 2, ½ ln 2) * 2**96 by factoring out powers of two such that
+    // exp(x) = exp(x') * 2**k, where k is an integer. Solving this gives k = round(x / log(2)) and
+    // x' = x - k * log(2).
     let k = ((x.wrapping_shl(96) / int256!(54916777467707473351141471128))
         .wrapping_add(int256!(2).pow(95)))
     .asr(96);
@@ -141,8 +137,8 @@ pub fn exp(mut x: I256) -> Result<I256> {
 
     // k is in the range [-61, 195].
 
-    // Evaluate using a (6, 7)-term rational approximation. p is made monic,
-    // we'll multiply by a scale factor later.
+    // Evaluate using a (6, 7)-term rational approximation. p is made monic, we'll multiply by a
+    // scale factor later.
     let mut y = x.wrapping_add(1346386616545796478920950773328_u128.into());
     y = y
         .wrapping_mul(x)
@@ -159,8 +155,7 @@ pub fn exp(mut x: I256) -> Result<I256> {
         .wrapping_mul(x)
         .wrapping_add(int256!(4385272521454847904659076985693276).wrapping_shl(96));
 
-    // We leave p in 2**192 basis so we don't need to scale it back up for the
-    // division.
+    // We leave p in 2**192 basis so we don't need to scale it back up for the division.
     let mut q = x.wrapping_sub(2855989394907223263936484059900_u128.into());
     q = q
         .wrapping_mul(x)
@@ -190,9 +185,8 @@ pub fn exp(mut x: I256) -> Result<I256> {
     // We now need to multiply r by:
     // * the scale factor s = ~6.031367120.
     // * the 2**k factor from the range reduction.
-    // * the 1e18 / 2**96 factor for base conversion. We do this all at once,
-    // with an intermediate result in 2**213 basis, so the final right shift is
-    // always by a positive amount.
+    // * the 1e18 / 2**96 factor for base conversion. We do this all at once, with an intermediate
+    // result in 2**213 basis, so the final right shift is always by a positive amount.
     r = I256::from_raw(
         (r.into_raw()
             .overflowing_mul(uint256!(3822833074963236453042738258902158003155416615667))
@@ -208,10 +202,9 @@ pub fn ln(mut x: I256) -> Result<I256> {
         bail!("Cannot calculate ln of of negative number or zero.");
     }
 
-    // We want to convert x from 10**18 fixed point to 2**96 fixed point. We do
-    // this by multiplying by 2**96 / 10**18. But since ln(x * C) = ln(x) +
-    // ln(C), we can simply do nothing here and add ln(2**96 / 10**18) at the
-    // end.
+    // We want to convert x from 10**18 fixed point to 2**96 fixed point. We do this by multiplying
+    // by 2**96 / 10**18. But since ln(x * C) = ln(x) + ln(C), we can simply do nothing here and add
+    // ln(2**96 / 10**18) at the end.
 
     let mut r = I256::from((x > I256::from(0xffffffffffffffffffffffffffffffff_u128)) as u128)
         .wrapping_shl(7);
@@ -229,8 +222,8 @@ pub fn ln(mut x: I256) -> Result<I256> {
     x = x.wrapping_shl(int256!(159).wrapping_sub(k).as_usize());
     x = I256::from_raw(x.into_raw().shr(159));
 
-    // Evaluate using a (8, 8)-term rational approximation. p is made monic, we
-    // will multiply by a scale factor later.
+    // Evaluate using a (8, 8)-term rational approximation. p is made monic, we will multiply by a
+    // scale factor later.
     let mut p = x.wrapping_add(int256!(3273285459638523848632254066296));
     p = ((p.wrapping_mul(x)).asr(96)).wrapping_add(int256!(24828157081833163892658089445524));
     p = ((p.wrapping_mul(x)).asr(96)).wrapping_add(int256!(43456485725739037958740375743393));
@@ -241,8 +234,8 @@ pub fn ln(mut x: I256) -> Result<I256> {
         .wrapping_mul(x)
         .wrapping_sub(int256!(795164235651350426258249787498).wrapping_shl(96));
 
-    // We leave p in 2**192 basis so we don't need to scale it back up for the
-    // division. q is monic by convention.
+    // We leave p in 2**192 basis so we don't need to scale it back up for the division. q is monic
+    // by convention.
     let mut q = x.wrapping_add(int256!(5573035233440673466300451813936));
     q = (q.wrapping_mul(x).asr(96)).wrapping_add(int256!(71694874799317883764090561454958));
     q = q
@@ -295,12 +288,12 @@ pub fn ln(mut x: I256) -> Result<I256> {
 
 #[cfg(test)]
 mod tests {
+    use ethers::types::{I256, U256};
     use proptest::prelude::*;
     use rand::{thread_rng, Rng};
 
     use super::*;
     use crate::FixedPoint;
-    use ethers::types::{I256, U256};
 
     // Tests for u256_from_str
     #[test]
@@ -312,7 +305,10 @@ mod tests {
         // Test with decimals
         assert_eq!(u256_from_str("1.5e1").unwrap(), U256::from(15));
         assert_eq!(u256_from_str("1.5e2").unwrap(), U256::from(150));
-        assert_eq!(u256_from_str("1.5e18").unwrap(), U256::from(15) * U256::from(10).pow(U256::from(17)));
+        assert_eq!(
+            u256_from_str("1.5e18").unwrap(),
+            U256::from(15) * U256::from(10).pow(U256::from(17))
+        );
 
         // Test with scientific notation
         assert_eq!(
@@ -341,8 +337,14 @@ mod tests {
         // Test with decimals
         assert_eq!(i256_from_str("1.5e1").unwrap(), I256::from(15));
         assert_eq!(i256_from_str("-1.5e1").unwrap(), I256::from(-15));
-        assert_eq!(i256_from_str("1.5e18").unwrap(), I256::from(15) * I256::from(10).pow(17));
-        assert_eq!(i256_from_str("-1.5e18").unwrap(), -I256::from(15) * I256::from(10).pow(17));
+        assert_eq!(
+            i256_from_str("1.5e18").unwrap(),
+            I256::from(15) * I256::from(10).pow(17)
+        );
+        assert_eq!(
+            i256_from_str("-1.5e18").unwrap(),
+            -I256::from(15) * I256::from(10).pow(17)
+        );
 
         // Test with scientific notation
         assert_eq!(i256_from_str("1e18").unwrap(), I256::from(10).pow(18));
@@ -358,12 +360,12 @@ mod tests {
         // Test invalid inputs
         assert!(i256_from_str("abc").is_err());
         assert!(i256_from_str("1.1.1").is_err());
-        
+
         // Test exponents too small (decimals would be truncated)
         assert!(i256_from_str("1.5e0").is_err());
-        
-        // The implementation treats "1.5e-1" as "-1.5e1" (the minus sign is applied to the whole number)
-        // This is a quirk of the current implementation
+
+        // The implementation treats "1.5e-1" as "-1.5e1" (the minus sign is applied to the whole
+        // number) This is a quirk of the current implementation
         let neg_exp = i256_from_str("1.5e-1").unwrap();
         assert_eq!(neg_exp, I256::from(-15));
     }
@@ -383,7 +385,6 @@ mod tests {
         for _ in 0..100 {
             // Generate random FixedPoint values using the i128 range
             let x_i128 = rng.gen_range(0..=1000000); // 0 to 1 in fixed point (after scaling)
-            // Scale to get a value between 0 and 1
             let x = I256::from(x_i128) * I256::from(10).pow(12); // scale to get values up to 1e18
             let result = exp(x).unwrap();
 
@@ -408,11 +409,11 @@ mod tests {
             // Generate random value in range 0-10
             let x1_i128 = rng.gen_range(0..10000000000i128); // 0 to 10 in fixed point (after scaling)
             let x1 = I256::from(x1_i128) * I256::from(10).pow(8); // scale to get values up to 10e18
-            
+
             // Create a larger value for x2
             let increment = I256::from(10).pow(16); // 0.01 in fixed point
             let x2 = x1 + increment;
-            
+
             let result1 = exp(x1).unwrap();
             let result2 = exp(x2).unwrap();
             assert!(result2 > result1);
@@ -423,12 +424,11 @@ mod tests {
             // Generate random value in range 0.1-10
             let x_i128 = rng.gen_range(100000000i128..10000000000i128); // 0.1 to 10 in fixed point (after scaling)
             let x = I256::from(x_i128) * I256::from(10).pow(9); // scale to get values from 0.1e18 to 10e18
-            
+
             let exp_x = exp(x).unwrap();
             let exp_neg_x = exp(-x).unwrap();
 
-            // Fixed point division to check if exp(-x) ≈ 1/exp(x)
-            // Need to scale by 1e18
+            // Fixed point division to check if exp(-x) ≈ 1/exp(x) Need to scale by 1e18
             let one_over_exp_x = I256::from(10).pow(36) / exp_x;
 
             // Allow for rounding errors
@@ -463,10 +463,10 @@ mod tests {
             // Generate random values in range 0.1-10
             let a_i128 = rng.gen_range(100000000i128..10000000000i128); // 0.1 to 10 in fixed point (after scaling)
             let b_i128 = rng.gen_range(100000000i128..10000000000i128); // 0.1 to 10 in fixed point (after scaling)
-            
+
             let a = I256::from(a_i128) * I256::from(10).pow(9); // scale to get values from 0.1e18 to 10e18
             let b = I256::from(b_i128) * I256::from(10).pow(9); // scale to get values from 0.1e18 to 10e18
-            
+
             // Compute a*b carefully to avoid overflow
             let a_fixed = FixedPoint::<I256>::new(a);
             let b_fixed = FixedPoint::<I256>::new(b);
@@ -493,11 +493,11 @@ mod tests {
         for _ in 0..100 {
             // Generate random values in range 1-100 for a and 0.1-1 for b
             let a_i128 = rng.gen_range(1000000000i128..100000000000i128); // 1 to 100 in fixed point (after scaling)
-            let b_i128 = rng.gen_range(100000000i128..1000000000i128);    // 0.1 to 1 in fixed point (after scaling)
-            
+            let b_i128 = rng.gen_range(100000000i128..1000000000i128); // 0.1 to 1 in fixed point (after scaling)
+
             let a = I256::from(a_i128) * I256::from(10).pow(9); // scale to get values from 1e18 to 100e18
             let b = I256::from(b_i128) * I256::from(10).pow(9); // scale to get values from 0.1e18 to 1e18
-            
+
             // Compute a/b carefully to avoid overflow
             let a_fixed = FixedPoint::<I256>::new(a);
             let b_fixed = FixedPoint::<I256>::new(b);
@@ -525,11 +525,11 @@ mod tests {
             // Generate random value in range 0.1-10
             let x1_i128 = rng.gen_range(100000000i128..10000000000i128); // 0.1 to 10 in fixed point (after scaling)
             let x1 = I256::from(x1_i128) * I256::from(10).pow(9); // scale to get values from 0.1e18 to 10e18
-            
+
             // Create a larger value for x2
             let increment = I256::from(10).pow(17); // 0.1 in fixed point
             let x2 = x1 + increment;
-            
+
             let result1 = ln(x1).unwrap();
             let result2 = ln(x2).unwrap();
             assert!(result2 > result1);

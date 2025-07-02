@@ -14,9 +14,8 @@ macro_rules! int256 {
     }};
 }
 
-/// Creates a `FixedPoint<T>` from a decimal number. Infers the type of `T` from
-/// the context. If the context is ambiguous, use a typed alternative such as
-/// [`fixed_u256!`] or [`fixed_i256!`].
+/// Creates a `FixedPoint<T>` from a decimal number. Infers the type of `T` from the context. If the
+/// context is ambiguous, use a typed alternative such as [`fixed_u256!`] or [`fixed_i256!`].
 #[macro_export]
 macro_rules! fixed {
     ($number:expr) => {{

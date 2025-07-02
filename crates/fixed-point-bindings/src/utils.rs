@@ -9,15 +9,14 @@ pub fn get_version() -> String {
     env!("CARGO_PKG_VERSION").to_string()
 }
 
-/// Create a new fixed-point number from a scaled value or another
-/// fixed-point number. If the value is already a fixed-point number, the
-/// number of decimal places will be adjusted to match the new value.
+/// Create a new fixed-point number from a scaled value or another fixed-point number. If the value
+/// is already a fixed-point number instance, the number of decimal places will be adjusted to match
+/// the new value.
 ///
-/// @param value - A scaled value between `-2^255` and `2^255 - 1` (signed
-/// 256-bit integer, i.e., `int256`).
+/// @param value - A scaled value between `-2^255` and `2^255 - 1` (signed 256-bit integer, i.e.,
+/// `int256`).
 ///
-/// @param decimals - The number of decimal places to use. Max is `18`.
-/// Defaults to `18`.
+/// @param decimals - The number of decimal places to use. Max is `18`. Defaults to `18`.
 ///
 /// @example
 /// ```js
@@ -43,13 +42,12 @@ pub fn fixed(value: Numberish, decimals: Option<u8>) -> Result<WasmFixedPoint, E
     WasmFixedPoint::new(value, decimals)
 }
 
-/// Create a fixed-point number by parsing a decimal value and scaling it by a
-/// given number of decimal places.
+/// Create a fixed-point number by parsing a decimal value and scaling it by a given number of
+/// decimal places.
 ///
 /// @param value - A value to parse and scale.
 ///
-/// @param decimals - The number of decimal places to use. Max is `18`. Defaults
-/// to `18`.
+/// @param decimals - The number of decimal places to use. Max is `18`. Defaults to `18`.
 ///
 /// @example
 //

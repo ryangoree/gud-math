@@ -82,8 +82,7 @@ try {
         },
       },
     },
-    // Explicitly set the publishConfig access to public to ensure it's published
-    // by changesets.
+    // Explicitly set the publishConfig access to public to ensure it's published by changesets.
     publishConfig: {
       access: 'public',
     },

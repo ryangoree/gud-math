@@ -34,8 +34,7 @@ impl<T: FixedPointValue> FixedPoint<T> {
     }
 
     pub fn try_from<V: TryInto<T> + Debug>(value: V) -> Result<Self> {
-        // Convert the value to a Debug string before moving it incase the
-        // conversion fails.
+        // Convert the value to a Debug string before moving it incase the conversion fails.
         let value_debug = format!("{:?}", value);
         let value = value.try_into().map_err(|_| {
             eyre!(
@@ -56,11 +55,10 @@ impl<T: FixedPointValue> FixedPoint<T> {
             FixedPointSign::Positive => Self::new(T::from_u256(abs)?),
             FixedPointSign::Negative => {
                 if abs == T::MIN.unsigned_abs() {
-                    // NOTE: The absolute MIN value of a two's-complement
-                    // integer is 1 greater than its MAX. Attempting to create a
-                    // positive `T` instance with this value then flipping the
-                    // sign after the fact will overflow, so we just return the
-                    // MIN value directly in this case.
+                    // NOTE: The absolute MIN value of a two's-complement integer is 1 greater than
+                    // its MAX. Attempting to create a positive `T` instance with this value then
+                    // flipping the sign after the fact will overflow, so we just return the MIN
+                    // value directly in this case.
                     Self::MIN
                 } else {
                     let raw = T::from_u256(abs)?.flip_sign();
@@ -71,8 +69,8 @@ impl<T: FixedPointValue> FixedPoint<T> {
     }
 
     pub fn from_dec_str(s: &str) -> Result<Self> {
-        if s.starts_with('-') {
-            Self::from_sign_and_abs(FixedPointSign::Negative, u256_from_str(&s[1..])?)
+        if let Some(stripped) = s.strip_prefix('-') {
+            Self::from_sign_and_abs(FixedPointSign::Negative, u256_from_str(stripped)?)
         } else {
             Self::from_sign_and_abs(FixedPointSign::Positive, u256_from_str(s)?)
         }
@@ -100,8 +98,8 @@ impl<T: FixedPointValue> FixedPoint<T> {
 
     // Getters //
 
-    /// Returns the underlying raw value of the fixed point number, e.g., `U256`
-    /// for `FixedPoint<U256>`.
+    /// Returns the underlying raw value of the fixed point number, e.g., `U256` for
+    /// `FixedPoint<U256>`.
     pub fn raw(&self) -> T {
         self.raw
     }
@@ -133,8 +131,8 @@ impl<T: FixedPointValue> FixedPoint<T> {
 
     // Conversion to other FixedPoint types //
 
-    /// Creates a `FixedPoint` instance with the same value as this instance but
-    /// with a different underlying `FixedPointValue` type.
+    /// Creates a `FixedPoint` instance with the same value as this instance but with a different
+    /// underlying `FixedPointValue` type.
     ///
     /// # Example
     ///
@@ -275,11 +273,11 @@ pub trait Fixed: FixedPointValue {
 // Add `.fixed()` to all types that implement `FixedPointValue`.
 impl<T: FixedPointValue> Fixed for T {}
 
-/// A type that can convert to `FixedPoint<T>` via `.to_fixed()`, and attempt
-/// conversion to `FixedPoint<T>` via `.try_to_fixed()`.
+/// A type that can convert to `FixedPoint<T>` via `.to_fixed()`, and attempt conversion to
+/// `FixedPoint<T>` via `.try_to_fixed()`.
 pub trait ToFixed: Sized + Debug {
-    /// Converts the value to a `FixedPoint<T>` instance, first converting the
-    /// value to the underlying `T` type if necessary.
+    /// Converts the value to a `FixedPoint<T>` instance, first converting the value to the
+    /// underlying `T` type if necessary.
     ///
     /// # Example
     ///
@@ -298,8 +296,8 @@ pub trait ToFixed: Sized + Debug {
         FixedPoint::<T>::new(self)
     }
 
-    /// Attempts to convert the value to a `FixedPoint<T>` instance, first
-    /// converting the value to the underlying `T` type if necessary.
+    /// Attempts to convert the value to a `FixedPoint<T>` instance, first converting the value to
+    /// the underlying `T` type if necessary.
     ///
     /// # Example
     ///
@@ -318,12 +316,11 @@ pub trait ToFixed: Sized + Debug {
     }
 }
 
-// Add `.to_fixed()` & `.try_to_fixed()` to all sized types that implement
-// `Debug`.
+// Add `.to_fixed()` & `.try_to_fixed()` to all sized types that implement `Debug`.
 impl<T: Sized + Debug> ToFixed for T {}
 
-/// Implements conversions to and from `FixedPoint<T>` for a list of types that
-/// can be converted to and from `T`.
+/// Implements conversions to and from `FixedPoint<T>` for a list of types that can be converted to
+/// and from `T`.
 macro_rules! conversion_impls {
     ($($t:ty),*) => {
         $(
@@ -350,8 +347,8 @@ macro_rules! conversion_impls {
     ($($tt:tt)*) => {};
 }
 
-// Direct conversions between primitive types and FixedPoint for any
-// `FixedPointValue` that can be converted to and from the primitive type.
+// Direct conversions between primitive types and FixedPoint for any `FixedPointValue` that can be
+// converted to and from the primitive type.
 conversion_impls!(i8, u8, i16, u16, i32, u32, i64, u64, isize, usize, [u8; 32], bool);
 
 #[cfg(test)]

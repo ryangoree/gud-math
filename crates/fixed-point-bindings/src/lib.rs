@@ -5,8 +5,8 @@ use core::fmt;
 use std::str::FromStr;
 
 use ethers::types::I256;
-use js_sys::{parse_float, BigInt, JsString};
 use fixed_point::{i256_from_str, ln, prelude::*};
+use js_sys::{parse_float, BigInt, JsString};
 use rand::{thread_rng, Rng};
 use ts_macro::ts;
 use utils_core::{
@@ -20,12 +20,11 @@ use wasm_bindgen::prelude::*;
 // Initialization function
 #[wasm_bindgen(start)]
 pub fn initialize() {
-    // When the `console_error_panic_hook` feature is enabled, we can call the
-    // `set_panic_hook` function at least once during initialization, and then
-    // we will get better error messages if our code ever panics.
+    // When the `console_error_panic_hook` feature is enabled, we can call the `set_panic_hook`
+    // function at least once during initialization, and then we will get better error messages if
+    // our code ever panics.
     //
-    // For more details see
-    // https://github.com/rustwasm/console_error_panic_hook#readme
+    // For more details see https://github.com/rustwasm/console_error_panic_hook#readme
     #[cfg(feature = "console_error_panic_hook")]
     console_error_panic_hook::set_once();
 }
@@ -77,15 +76,14 @@ impl WasmFixedPoint {
         })
     }
 
-    /// Create a new fixed-point number from a scaled value or another
-    /// fixed-point number. If the value is already a fixed-point number, the
-    /// number of decimal places will be adjusted to match the new value.
+    /// Create a new fixed-point number from a scaled value or another fixed-point number. If the
+    /// value is already a fixed-point number, the number of decimal places will be adjusted to
+    /// match the new value.
     ///
-    /// @param value - A scaled value between `-2^255` and `2^255 - 1` (signed
-    /// 256-bit integer, i.e., `int256`).
+    /// @param value - A scaled value between `-2^255` and `2^255 - 1` (signed 256-bit integer,
+    /// i.e., `int256`).
     ///
-    /// @param decimals - The number of decimal places to use. Max is `18`.
-    /// Defaults to `18`.
+    /// @param decimals - The number of decimal places to use. Max is `18`. Defaults to `18`.
     ///
     /// @example
     /// ```js
@@ -111,13 +109,12 @@ impl WasmFixedPoint {
         WasmFixedPoint::new(value, decimals)
     }
 
-    /// Create a fixed-point number by parsing a decimal value and scaling it by
-    /// a given number of decimal places.
+    /// Create a fixed-point number by parsing a decimal value and scaling it by a given number of
+    /// decimal places.
     ///
     /// @param value - A value to parse and scale.
     ///
-    /// @param decimals - The number of decimal places to use. Max is `18`.
-    /// Defaults to `18`.
+    /// @param decimals - The number of decimal places to use. Max is `18`. Defaults to `18`.
     ///
     /// @example
     //
@@ -149,7 +146,7 @@ impl WasmFixedPoint {
             let mut parts = s.split("e");
             let mantissa_str = parts.next().unwrap_or_default();
             let exponent_str = parts.next().unwrap_or_default();
-            let exponent = i8::from_str_radix(exponent_str, 10).to_result()?;
+            let exponent = exponent_str.parse::<i8>().to_result()?;
             let mut mantissa_parts = mantissa_str.split(".");
             let int_str = mantissa_parts.next().unwrap_or_default();
             let fraction_str = mantissa_parts.next().unwrap_or_default();
@@ -176,8 +173,7 @@ impl WasmFixedPoint {
 
     /// Create a fixed-point number representing one unit.
     ///
-    /// @param decimals - The number of decimal places to use. Max is `18`.
-    /// Defaults to `18`.
+    /// @param decimals - The number of decimal places to use. Max is `18`. Defaults to `18`.
     #[wasm_bindgen(skip_jsdoc)]
     pub fn one(decimals: Option<u8>) -> Result<WasmFixedPoint, Error> {
         let decimals = decimals.unwrap_or(INNER_DECIMALS);
@@ -283,8 +279,7 @@ impl WasmFixedPoint {
         })
     }
 
-    /// Multiply this fixed-point number by another, then divide by a divisor,
-    /// rounding down.
+    /// Multiply this fixed-point number by another, then divide by a divisor, rounding down.
     #[wasm_bindgen(skip_jsdoc, js_name = mulDivDown)]
     pub fn mul_div_down(
         &self,
@@ -301,8 +296,7 @@ impl WasmFixedPoint {
         })
     }
 
-    /// Multiply this fixed-point number by another, then divide by a divisor,
-    /// rounding up.
+    /// Multiply this fixed-point number by another, then divide by a divisor, rounding up.
     #[wasm_bindgen(skip_jsdoc, js_name = mulDivUp)]
     pub fn mul_div_up(
         &self,
@@ -487,8 +481,7 @@ impl WasmFixedPoint {
 
     // Conversion //
 
-    /// Create a new fixed-point number from this one, with a given number of
-    /// decimal places.
+    /// Create a new fixed-point number from this one, with a given number of decimal places.
     ///
     /// @example
     /// ```ts
@@ -522,11 +515,11 @@ impl WasmFixedPoint {
     /// ```
     #[wasm_bindgen(skip_jsdoc, js_name = toNumber)]
     pub fn to_number(&self) -> f64 {
-        parse_float(&self.to_string())
+        parse_float(&self.to_string_js())
     }
 
-    /// Get the scaled hexadecimal string representation of this fixed-point
-    /// number with the `0x` prefix.
+    /// Get the scaled hexadecimal string representation of this fixed-point number with the `0x`
+    /// prefix.
     ///
     /// @example
     /// ```ts
@@ -542,7 +535,7 @@ impl WasmFixedPoint {
 
     /// Get the decimal string representation of this fixed-point number.
     #[wasm_bindgen(skip_jsdoc, js_name = toString)]
-    pub fn to_string(&self) -> String {
+    pub fn to_string_js(&self) -> String {
         let str = self.inner.to_string();
 
         // If there are no decimals, return the integer part only.
@@ -559,12 +552,18 @@ impl WasmFixedPoint {
 
     #[wasm_bindgen(skip_jsdoc, js_name = valueOf)]
     pub fn value_of(&self) -> String {
-        self.to_string()
+        self.to_string_js()
     }
 
     // Internal //
 
     fn scale_factor(decimals: u8) -> FixedPoint<I256> {
+        // INNER_DECIMALS is multiplied by 2 to account for the decimal places in the returned
+        // FixedPoint. For example:
+        //   - INNER_DECIMALS = 18, decimals = 16
+        //   - Desired factor = 10^(18-16) = 10^2 = 100.0
+        //   - As a FixedPoint:
+        //     - 10^(18*2-16) = 10^20 = 100000000000000000000 (100.000000000000000000)
         let factor = I256::from(10).pow((INNER_DECIMALS * 2 - decimals) as u32);
         FixedPoint::from(factor)
     }

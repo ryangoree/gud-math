@@ -40,8 +40,8 @@ macro_rules! conversion_fns {
 
 /// A value that can be used to perform fixed-point math.
 ///
-/// All methods have default implementations based on comparisons to `0`, but
-/// can be overridden to provide more efficient alternatives.
+/// All methods have default implementations based on comparisons to `0`, but can be overridden to
+/// provide more efficient alternatives.
 pub trait FixedPointValue:
     Copy
     + Debug
@@ -66,12 +66,10 @@ pub trait FixedPointValue:
     + TryFrom<U256>
     + TryInto<U256>
 {
-    /// The minimum value that can be represented by the type.
-    /// Must be `-2^256-1..=2^256 - 1`.
+    /// The minimum value that can be represented by the type. Must be `-2^256-1..=2^256 - 1`.
     const MIN: Self;
 
-    /// The maximum value that can be represented by the type.
-    /// Must be `0..=2^256 - 1`.
+    /// The maximum value that can be represented by the type. Must be `0..=2^256 - 1`.
     const MAX: Self;
 
     /// The maximum number of decimal places the value can support.
@@ -98,8 +96,8 @@ pub trait FixedPointValue:
     ///
     /// # Panics
     ///
-    /// If the value doesn't support negation or the value overflows, i.e., the
-    /// value is equal to `MIN`.
+    /// If the value doesn't support negation or the value overflows, i.e., the value is equal to
+    /// `MIN`.
     fn flip_sign(self) -> Self {
         if !Self::is_signed() {
             panic!("Cannot flip sign of unsigned type: {self:?}");
@@ -111,8 +109,8 @@ pub trait FixedPointValue:
     ///
     /// # Panics
     ///
-    /// If the value doesn't support negation or the value overflows, i.e., the
-    /// value is equal to `MIN`.
+    /// If the value doesn't support negation or the value overflows, i.e., the value is equal to
+    /// `MIN`.
     fn flip_sign_if(self, condition: bool) -> Self {
         if condition {
             self.flip_sign()
@@ -125,8 +123,8 @@ pub trait FixedPointValue:
     ///
     /// # Panics
     ///
-    /// If the absolute value of self overflows `T`, e.g., if self is the
-    /// minimum value of a signed integer.
+    /// If the absolute value of self overflows `T`, e.g., if self is the minimum value of a signed
+    /// integer.
     fn abs(self) -> Self {
         self.flip_sign_if(self.is_negative())
     }

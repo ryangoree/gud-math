@@ -43,7 +43,8 @@ console.log(total.formatCurrency())
 
 ## Custom decimal places
 
-By default, all fixed-point numbers are created with 18 decimal places, but this can be changed by passing a second argument to the `fixed` and `parseFixed` functions.
+By default, all fixed-point numbers are created with 18 decimal places, but this can be changed by
+passing a second argument to the `fixed` and `parseFixed` functions.
 
 ```ts
 const n = fixed(1500000n, 6);

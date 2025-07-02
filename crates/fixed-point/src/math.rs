@@ -10,8 +10,8 @@ impl<T: FixedPointValue> FixedPoint<T> {
     ///
     /// # Panics
     ///
-    /// If the absolute value of self overflows `T`, e.g., if self is the
-    /// minimum value of a signed integer.
+    /// If the absolute value of self overflows `T`, e.g., if self is the minimum value of a signed
+    /// integer.
     pub fn abs(&self) -> Self {
         self.raw().abs().into()
     }
@@ -106,12 +106,11 @@ impl<T: FixedPointValue> FixedPoint<T> {
             return Ok(Self::zero());
         }
 
-        // Using properties of logarithms we calculate x^y: -> ln(x^y) = y *
-        // ln(x) -> e^(y * ln(x)) = x^y
+        // Using properties of logarithms we calculate x^y: -> ln(x^y) = y * ln(x) -> e^(y * ln(x))
+        // = x^y
         let y_int256 = y.to_i256()?;
 
-        // Compute y*ln(x) Any overflow for x will be caught in _ln() in the
-        // initial bounds check
+        // Compute y*ln(x) Any overflow for x will be caught in _ln() in the initial bounds check
         let lnx = ln(self.to_i256()?)?;
         let mut ylnx = y_int256.wrapping_mul(lnx);
         ylnx = ylnx.wrapping_div(one.to_i256()?);
@@ -130,8 +129,8 @@ impl<T: FixedPointValue> Neg for FixedPoint<T> {
     }
 }
 
-/// Takes a mapping of operator traits to `FixedPoint` methods and implements
-/// the operator and assignment operator for each one.
+/// Takes a mapping of operator traits to `FixedPoint` methods and implements the operator and
+/// assignment operator for each one.
 macro_rules! mapped_operator_impls {
     ($($trait:ident => $fn:ident),*) => {
         $(
@@ -163,9 +162,8 @@ mapped_operator_impls!(
     Div => div_down
 );
 
-/// Takes a list of operator traits and implements the operator and assignment
-/// operator for each one by forwarding to the corresponding method on the
-/// underlying `FixedPointValue`.
+/// Takes a list of operator traits and implements the operator and assignment operator for each one
+/// by forwarding to the corresponding method on the underlying `FixedPointValue`.
 macro_rules! forwarded_operator_impls {
     ($($trait:ident),*) => {
         $(
@@ -268,7 +266,8 @@ mod tests {
             let b = rng.gen_range(0.into()..=max / a);
             let c = rng.gen_range(1.into()..=max); // Ensure non-zero divisor
 
-            // Property 1: Check if mul_div_up equals mul_div_down for small, exactly divisible values
+            // Property 1: Check if mul_div_up equals mul_div_down for small, exactly divisible
+            // values
             let one = a.one();
             let two = one + one;
             let four = two + two;
@@ -277,8 +276,8 @@ mod tests {
             assert_eq!(two.mul_div_up(two, four), one); // 2*2/4 = 1
             assert_eq!(two.mul_div_down(two, four), one); // 2*2/4 = 1
 
-            // Property 2: Check relationship between mul_div_up and mul_div_down
-            // If the division is not exact, mul_div_up should be greater than mul_div_down
+            // Property 2: Check relationship between mul_div_up and mul_div_down If the division is
+            // not exact, mul_div_up should be greater than mul_div_down
             if a.mul_div_up(b, c) != a.mul_div_down(b, c) {
                 assert!(a.mul_div_up(b, c) > a.mul_div_down(b, c));
 
@@ -435,8 +434,8 @@ mod tests {
 
                 // Property 5: If exactly divisible, div_up = div_down
                 if a.div_up(b) == a.div_down(b) {
-                    // If the division is exact, up and down rounding are the same
-                    // No further checks needed
+                    // If the division is exact, up and down rounding are the same No further checks
+                    // needed
                 } else {
                     // The difference should be exactly 1 for proper rounding
                     let diff = a.div_up(b) - a.div_down(b);
@@ -502,8 +501,8 @@ mod tests {
                 }
             }
 
-            // Property 6: For fractional y where y = a/b, verify (x^a)^(1/b) ≈ x^y
-            // This property is harder to test due to precision issues
+            // Property 6: For fractional y where y = a/b, verify (x^a)^(1/b) ≈ x^y This property is
+            // harder to test due to precision issues
 
             // Property 7: Negative exponents: x^(-y) = 1/(x^y)
             if !x.is_zero() && !y.is_zero() {
