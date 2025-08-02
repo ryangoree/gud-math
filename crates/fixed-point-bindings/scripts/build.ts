@@ -76,9 +76,9 @@ try {
     exports: {
       '.': {
         default: {
+          types: `./${packageBaseName}.d.ts`,
           require: `./${packageBaseName}.cjs`,
           import: `./${packageBaseName}.js`,
-          types: `./${packageBaseName}.d.ts`,
         },
       },
     },

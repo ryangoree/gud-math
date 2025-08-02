@@ -14,9 +14,9 @@
   "exports": {
     ".": {
       "default": {
+        "types": "./math.d.ts",
         "require": "./math.cjs",
-        "import": "./math.js",
-        "types": "./math.d.ts"
+        "import": "./math.js"
       }
     }
   },
